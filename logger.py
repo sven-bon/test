@@ -8,7 +8,6 @@ import sys
 """
 日志使用方法：
 from logger import log
-
 log.info('your info')
 log.debug('heyhey')
 

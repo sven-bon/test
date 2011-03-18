@@ -5,4 +5,5 @@
 /testcases/qq_result
 /testcases/result
 /testcases/*.bak
+/testcases/*--.xml
 *.log
