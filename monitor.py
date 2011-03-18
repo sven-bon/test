@@ -65,7 +65,6 @@ class Monitor:
         return os.path.abspath(rsdir)
 
       
-
     """
     从XML生成TestCase的内容，xml参数可能是文本，也可能是一个文件
     """
@@ -101,7 +100,7 @@ class Monitor:
             return test_node
         else:
             log.warn('no test node in the xml!')
-
+    #结果处理
     def handle_result(self,result):
         log.debug('handling test result')
         if getattr(self,'result_handler',None):
@@ -114,7 +113,7 @@ class Monitor:
         else:
             log.debug('handle result in the default way,save as xml file')
             self.result2xml(result)
-
+    #输出结果到xml文件
     def result2xml(self,result):
         log.debug('save test result to xml %s'%result)
 	rsdir=self.get_testResult_dir()
