@@ -143,8 +143,7 @@ def create_xmldoc(result):
 	        for filename, lineno, function, msg in traceback.extract_tb(rs.exc_info[2]):
 	            child_rs_except_text3=xml_doc.createTextNode('%s line %s in %s function [%s]'%(filename,lineno,function,msg))
 	            child_rs_except.appendChild(child_rs_except_text3)
-                child.appendChild(child_rs_except)
-	    
+                child.appendChild(child_rs_except)    
         testResult.appendChild(child)
     
     if result.__dict__.has_key('exc_info'):
@@ -159,7 +158,6 @@ def create_xmldoc(result):
 	    rs_except_text3=xml_doc.createTextNode('%s line %s in %s function (%s)'%(filename,lineno,function,msg))
 	    rs_except.appendChild(rs_except_text3)
         testResult.appendChild(rs_except)
-    
     xml_doc.appendChild(testResult)
     #return encode_for_xml(xml_doc.toxml(),'utf-8')
     return xml_doc
