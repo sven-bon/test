@@ -21,6 +21,8 @@ def unregister(name):
 
 def get_registed_node(name):
     return register_node.get(name,None)
+
+#判断是否详细记录结果
 def islog(obj,arg=None):
     if getattr(obj,'log',None):
         log = getattr(obj,'log',None)
@@ -37,6 +39,7 @@ def islog(obj,arg=None):
 class TestAssertionError(Exception):
     pass
 '''
+
 def wrap(value):
     class Wrapper(value.__class__):
         def __init__(self,v,*arg,**kwargs):
@@ -270,7 +273,6 @@ class TestCase(TestNode):
             try:
                 rs = child()
 		self.setResult(child,result,rs)
-		
                 if rs.status in ['ERROR','FAIL']:
 		    print '=============error======'
                     # 测试组件自检出错
@@ -290,6 +292,7 @@ class TestCase(TestNode):
         self.teardown()
         result.nodename=self.name
 	return result
+
     #设置callback中的result
     def setResult(self,child,result,rs):
 	if child._name in [u'sample','sample']:
@@ -301,6 +304,7 @@ class TestCase(TestNode):
 	    rs.nodetype='assert'
 	    rs._assert=child
 	    result.sections.append(rs)
+
     """
     应用全局配置的原则是：
     对于某些配置属性，当测试用例没有显式配置时，使用全局配置
@@ -352,6 +356,7 @@ class Sample(TestNode):
 	    sampler = type(str(self.type.upper())+'Sampler',(Sample,),{})
 	    self.__class__ = sampler
 	    self.__class__.__bases__ +=(sampler_cls,)
+
     def parse_child_tags(self,xml):
         self.apply_sampler()
 
@@ -433,6 +438,7 @@ class Assert(TestNode):
             result.exc_info=sys.exc_info()
             result.exc_info[1].message = 'not exists Attribute \''+result.exc_info[1].message+'\' in this assert'
         return result
+
     #对上面进行改进，对soap也适用
     def getData(self):
         from SOAPpy import Types
