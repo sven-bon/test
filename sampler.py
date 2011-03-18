@@ -17,7 +17,10 @@ def unregister(name):
 
 def get_sampler(name):
     return sampler_map[name]
+
+#定义参数异常类
 class argsException(Exception):pass
+
 #简单的类型校验
 def convert(v=None,t=None):
     if v is None:return None
@@ -29,21 +32,10 @@ def convert(v=None,t=None):
             return True
         else:return False
     else:return str(v)
-#=============定义继承BodyType的类型
+ 
+#定义继承BodyType的类型
 class argObj(Types.bodyType):pass
 
-#旧的建造BodyType对象方法,主要是根据配置文件构造
-def build(arg,o=None):
-    for (k,v) in arg.items():
-        if v.__class__ is dict:
-            obj = argObj()
-            if o is None:
-                arg[k]=obj
-            else:
-                o._addItem(k, obj)
-            build(v,obj)   
-	elif Types.bodyType in o.__class__.__bases__:
-            o._addItem("ns1:"+k, v)
 # ============ Sampler定义，这些类均不应直接实例化，是被Mixin到Sample类里面使用的 ============
 
 class HTTPSampler(object):
@@ -200,7 +192,8 @@ class SOAPSampler(object):
         elif b : 
             b = arg
         return b
-    	
+    
+    #把配置文件中的data转换成对应的json	
     def wrapdata(self):
         if self.data.format == 'json':
 	    import json
