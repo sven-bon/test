@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test name="logintest" timeout="30" loop="1" frequency="20"  log="true">
+	<sample
+	  id="valid"
+	  type="SOAP"
+	  wsdl="http://webservice.webxml.com.cn/webservices/qqOnlineWebService.asmx?WSDL"
+	  method="qqCheckOnline"
+	  timeout="30"
+	  >
+	  <data format="json">
+	  	<![CDATA[
+	  	{"qqCode":"474416133"}
+	  	]]>
+	  </data>
+	 </sample>
+	 <assert type="eq">
+		<item>${valid}</item>
+		<item>Y</item>
+	</assert>	
+	<sample
+	  id="valid1"
+	  type="SOAP"
+	  wsdl="http://webservice.webxml.com.cn/WebServices/ChinaZipSearchWebService.asmx?WSDL"
+	  method="getAddressByZipCode"
+	  timeout="30"
+	  log="F"
+	  >
+	  <data format="json">
+	  	<![CDATA[
+	  	{"theZipCode":"510520","userID":""}
+	  	]]>
+	  </data>
+	 </sample>
+	 <assert type="eq">
+		<item>${valid1[0].ADDRESS}</item>
+		<item>(黄陂农工商公司大岭田)</item>
+	</assert>	
+	<sample
+	  id="valid2"
+	  type="SOAP"
+	  wsdl="http://192.168.0.26:123/ws.asmx?WSDL"
+	  method="GetPwd"
+	  timeout="30"
+	  log="F"
+	  >
+	  <data format="json">
+	  	<![CDATA[
+	  	{"user":{"name":"qiu","type":{"typeName1":"people"},"age":20}}
+	  	]]>
+	  </data>
+	 </sample>
+	 <assert type="eq">
+		<item>${valid2}</item>
+		<item>222222</item>
+	</assert>	
+</test>
