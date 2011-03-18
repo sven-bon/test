@@ -19,9 +19,7 @@ class MonitorConfig:
         self.master_check_time = 10 # 主线程检测是否还有工作进程的间隔时间，单位为秒
         
         self.testResult_dir=self.testdir+'\\qq_result'
-        
-	self.reslut2xml_isDetail=True
-
+     
         for k,v in kwargs.items():
             if k[0] != '_': # 预防修改私有变量
                 setattr(self,k,v)
